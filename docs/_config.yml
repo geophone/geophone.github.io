@@ -30,7 +30,8 @@ twitter_username: jekyllrb
 github_username:  geophone
 
 # Build settings
-theme: minima
+#theme: minima
+remote_theme: jekyll/minima@d4d779a
 plugins:
   - jekyll-feed
 
