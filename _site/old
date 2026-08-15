@@ -3,20 +3,20 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Blog | Infosec, chess, strategy</title>
+<title>Home | Blog</title>
 <meta name="generator" content="Jekyll v4.3.2" />
-<meta property="og:title" content="Blog" />
+<meta property="og:title" content="Home" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Infosec, chess, strategy" />
 <meta property="og:description" content="Infosec, chess, strategy" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<link rel="canonical" href="http://localhost:4000/old" />
+<meta property="og:url" content="http://localhost:4000/old" />
 <meta property="og:site_name" content="Blog" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Blog" />
+<meta property="twitter:title" content="Home" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Infosec, chess, strategy","headline":"Blog","name":"Blog","url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Infosec, chess, strategy","headline":"Home","url":"http://localhost:4000/old"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Blog" /></head>
 <body><header class="site-header" role="banner">
@@ -36,21 +36,26 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
-<h2 class="post-list-heading">Posts</h2>
-    <ul class="post-list"><li><span class="post-meta">Aug 14, 2026</span>
-        <h3>
-          <a class="post-link" href="/jekyll/update/2026/08/14/second-post.html">
-            Hello World
-          </a>
-        </h3></li><li><span class="post-meta">Aug 14, 2026</span>
-        <h3>
-          <a class="post-link" href="/jekyll/update/2026/08/14/welcome-to-jekyll.html">
-            Welcome to Jekyll!
-          </a>
-        </h3></li></ul>
+        <h1>Latest Posts</h1>
 
-    <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p></div>
+<ul class="post-list">
+  
+    <li>
+      <span class="post-date">Aug 14, 2026</span>
+      <h2><a href="/jekyll/update/2026/08/14/second-post.html">Hello World</a></h2>
+      <p><p>This is my first post. Jekyll will pick this up automatically
+because it’s in <code class="language-plaintext highlighter-rouge">_posts</code> and named with a date.</p>
+</p>
+    </li>
+  
+    <li>
+      <span class="post-date">Aug 14, 2026</span>
+      <h2><a href="/jekyll/update/2026/08/14/welcome-to-jekyll.html">Welcome to Jekyll!</a></h2>
+      <p><p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+</p>
+    </li>
+  
+</ul>
 
       </div>
     </main><footer class="site-footer h-card">
