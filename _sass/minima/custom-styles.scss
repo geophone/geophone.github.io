@@ -29,8 +29,6 @@ $table-header-bg-color:  #1a2942 !default;
 $table-header-border:    #1a2942 !default;
 $table-border-color:     $border-color-01 !default;
 
-@import "minima";
-
 // Custom styles after the import
 .site-header {
   border-top: 5px solid $table-header-bg-color;
