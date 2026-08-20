@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-08-19T21:13:12-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Blog</title><subtitle>Infosec, chess, strategy</subtitle><entry><title type="html">Tweaking/tuning jekyll on github pages</title><link href="http://localhost:4000/2026/08/19/customizing-jekyll-on-pages.html" rel="alternate" type="text/html" title="Tweaking/tuning jekyll on github pages" /><published>2026-08-19T00:00:00-06:00</published><updated>2026-08-19T00:00:00-06:00</updated><id>http://localhost:4000/2026/08/19/customizing-jekyll-on-pages</id><content type="html" xml:base="http://localhost:4000/2026/08/19/customizing-jekyll-on-pages.html"><![CDATA[<p>I found that it’s rather involved to customize jekyll on github to run a proper css /scss customization.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-08-19T21:22:19-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Blog</title><subtitle>Infosec, chess, strategy</subtitle><entry><title type="html">Tweaking/tuning jekyll on github pages</title><link href="http://localhost:4000/2026/08/19/customizing-jekyll-on-pages.html" rel="alternate" type="text/html" title="Tweaking/tuning jekyll on github pages" /><published>2026-08-19T00:00:00-06:00</published><updated>2026-08-19T00:00:00-06:00</updated><id>http://localhost:4000/2026/08/19/customizing-jekyll-on-pages</id><content type="html" xml:base="http://localhost:4000/2026/08/19/customizing-jekyll-on-pages.html"><![CDATA[<p>I found that it’s rather involved to customize jekyll on github to run a proper css /scss customization.</p>
 
 <p>First you need minima 3.0 to override hooks which you need to specify in your Gemfile so that it pulls in the right version</p>
 
@@ -310,4 +310,63 @@ Usage:
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
     <span class="nf">main</span><span class="p">()</span>
 
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[It looks like some modern captchas can be bypassed trivially with opencv.]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[It looks like some modern captchas can be bypassed trivially with opencv.]]></summary></entry><entry><title type="html">Kali linux on dgx spark with virt manager</title><link href="http://localhost:4000/2026/06/12/kali-linux-on-dgx-spark.html" rel="alternate" type="text/html" title="Kali linux on dgx spark with virt manager" /><published>2026-06-12T00:00:00-06:00</published><updated>2026-06-12T00:00:00-06:00</updated><id>http://localhost:4000/2026/06/12/kali-linux-on-dgx-spark</id><content type="html" xml:base="http://localhost:4000/2026/06/12/kali-linux-on-dgx-spark.html"><![CDATA[<p>Kali Linux running in Virt-Manager on DGX Spark
+Took me a while to get Kali Linux running
+Turns out there’s a small trick required to the default settings to get it going
+You have to select configure machine before boot checkbox</p>
+
+<p><img src="/assets/images/kalilinux/kali1.png" alt="kali1.png" /></p>
+
+<p>Then in the configuration under overview</p>
+
+<p><img src="/assets/images/kalilinux/kali2.png" alt="kali2.png" /></p>
+
+<p>I tried AAVMF both secboot and no sec boot and both worked fine
+however without this, the machine didn’t boot
+I also chose Debian 13</p>
+
+<p>Some guides recommend Debian 11, that’s out of date.
+I found that when I booted up by default virt-manager had not supplied a graphical interface for the gui or display manager to run on.
+I also found that enabling spice before install made it impossible to send keystrokes to grub to select the graphical install.</p>
+
+<p>TLDR - - - - - - - ADD SPICE(graphics display) AFTER INSTALL - - - - - - - - - - -</p>
+
+<p>So I added the hardware for spice and virtio AFTER installing Kali worked fine to display the UI despite indications QXL was required.
+I still wasn’t able to send keystrokes or mouse movements so I looked into connecting to the display directly</p>
+
+<p><img src="/assets/images/kalilinux/kali3.png" alt="kali3.png" /></p>
+
+<p>It turns out you have to add inputs which are the basic usb inputs as hardware to get the spice server working properly so there’s a bunch of hardware to add, 1 input USB keyboard 1 input USB mouse 1 graphics, display spice 1 video virtio .
+I had no issue with qxl or whatnot
+Your list of hardware should look something like this</p>
+
+<p><img src="/assets/images/kalilinux/kali4.png" alt="kali4.png" /></p>
+
+<p>When installing kali packages, I added gnome for simplicity of getting it working without using lightdm which is also fine</p>
+
+<p>I found that I wasn’t able to get the install working with the spice graphics server, so I recommend adding that hardware after install through the serial console.
+Incidentally I found that enabling opengl support/3d acceleration isn’t fully reversible through the UI, once enabled, I couldn’t properly fix the vm to boot again without it.</p>
+
+<p>Lastly I found I had to add a usb tablet input device to make the mouse cursor function not just the USB mouse, working kali linux</p>
+
+<p><img src="/assets/images/kalilinux/kali5.png" alt="kali5.png" /></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Kali Linux running in Virt-Manager on DGX Spark Took me a while to get Kali Linux running Turns out there’s a small trick required to the default settings to get it going You have to select configure machine before boot checkbox]]></summary></entry><entry><title type="html">Vast.ai hosting</title><link href="http://localhost:4000/2026/04/15/vast-ai-hosting.html" rel="alternate" type="text/html" title="Vast.ai hosting" /><published>2026-04-15T00:00:00-06:00</published><updated>2026-04-15T00:00:00-06:00</updated><id>http://localhost:4000/2026/04/15/vast-ai-hosting</id><content type="html" xml:base="http://localhost:4000/2026/04/15/vast-ai-hosting.html"><![CDATA[<p>vast.ai hosting</p>
+
+<p>Looked into vast.ai hosting recently and learned a bunch!</p>
+
+<p>For starters your best bet is to start with a Ubuntu 24.04 LTS base image.
+Using more recent versions of Ubuntu is problematic due to a number of factors. One principle one is the pipes module which is deprecated in modern ubuntu system python. Using a non-standard python (non-system) results in other complications such as reliance on deprecated apt-key.</p>
+
+<p>I learned this through viewing install logs and examining the script.
+There are some small bugs in the UI such as speedtest when manually run through the vast.ai not necessarily updating the uplink and downlink which can often be stale through my experimentation.</p>
+
+<p>Also there is mention of rocM support (AMD GPUs) however this is actually out of date and currently only Nvidia is supported.</p>
+
+<p>Most of the install guides can be skipped once you have the 24.04 base image you simply run the python3 wget and install line and it handles all the nonsense. I found that removing a machine and re-adding remedied the local network ip address change which is mentioned in the doc.
+In short summary</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Use ubuntu 24.04 LTS base image
+
+Install directly via <span class="nb">install </span>line without messing with the rest of the configuration<span class="o">(</span>although ssd partitioning may be a serious improvement<span class="o">)</span> and <span class="k">if </span>you need an update fresh <span class="nb">install </span>is easiest
+</code></pre></div></div>
+<p>Nvidia only is supported</p>
+
+<p>GL hosting!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[vast.ai hosting]]></summary></entry></feed>
