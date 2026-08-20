@@ -853,18 +853,116 @@ table td {
     width: calc(50% - 30px / 2);
   }
 }
-.site-header {
-  border-top: 5px solid rgb(93.5882352941%, 93.5882352941%, 93.5882352941%);
-  border-bottom: 1px solid #e7e7e7;
+.site-footer .footer-col p,
+.site-footer .footer-col li,
+.site-footer .contact-list,
+.site-footer .social-media-list {
+  color: #dcdccc !important;
+}
+.site-footer .footer-heading {
+  color: #f0dfaf !important;
+}
+.site-footer a {
+  color: #8cd0d3 !important;
+}
+.site-footer a:hover {
+  color: #dfaf8f !important;
 }
 
-.site-title {
-  font-weight: 700;
-  color: rgb(25.5882352941%, 25.5882352941%, 25.5882352941%) !important;
+.site-nav .nav-items a, .site-nav .nav-items.nav-item,
+.site-nav .nav-item a,
+.site-nav .nav-item.nav-item,
+.site-nav .page-link a,
+.site-nav .page-link.nav-item {
+  color: #8cd0d3 !important;
+}
+.site-nav .nav-items a:visited, .site-nav .nav-items.nav-item:visited,
+.site-nav .nav-item a:visited,
+.site-nav .nav-item.nav-item:visited,
+.site-nav .page-link a:visited,
+.site-nav .page-link.nav-item:visited {
+  color: #8cd0d3 !important;
+}
+.site-nav .nav-items a:hover, .site-nav .nav-items.nav-item:hover,
+.site-nav .nav-item a:hover,
+.site-nav .nav-item.nav-item:hover,
+.site-nav .page-link a:hover,
+.site-nav .page-link.nav-item:hover {
+  color: #dfaf8f !important;
+  text-decoration: underline;
+}
+
+body {
+  background-color: #3f3f3f;
+  color: #dcdccc;
+}
+
+.site-header,
+.site-footer {
+  background-color: #4f4f4f;
+  border-color: #5f5f5f;
+}
+
+.site-title,
+.site-title:visited {
+  color: #f0dfaf !important;
+}
+
+.site-nav .page-link {
+  color: #dcdccc !important;
 }
 
 a {
-  transition: color 0.15s ease-in-out;
+  color: #8cd0d3;
+}
+a:visited {
+  color: #8cd0d3;
+}
+a:hover {
+  color: #dfaf8f;
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #f0dfaf;
+}
+
+.post-title, .post-title a {
+  color: #f0dfaf !important;
+}
+
+.post-content,
+.page-content {
+  color: #dcdccc;
+}
+
+.post-meta {
+  color: #a0a0a0;
+}
+
+blockquote {
+  color: #7f9f7f;
+  border-left: 4px solid #5f5f5f;
+}
+
+pre, code {
+  background-color: #363636;
+  color: #dcdccc;
+  border: 1px solid #5f5f5f;
+}
+
+table th, table td {
+  border-color: #5f5f5f;
+}
+table th {
+  background-color: #4f4f4f;
+}
+table tr:nth-child(even) {
+  background-color: rgb(27.7058823529%, 27.7058823529%, 27.7058823529%);
+}
+
+hr {
+  border-color: #5f5f5f;
 }
 
 /*# sourceMappingURL=style.css.map */
