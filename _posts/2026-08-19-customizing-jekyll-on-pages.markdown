@@ -1,3 +1,8 @@
+---
+layout: post
+title: "Jekyll/minima3.0.0 on github"
+date: 2026-08-19
+---
 I found that it's rather involved to customize jekyll on github to run a proper css /scss customization.
 
 First you need minima 3.0 to override hooks which you need to specify in your Gemfile so that it pulls in the right version
