@@ -1,0 +1,49 @@
+---
+---
+
+
+@charset "utf-8";
+
+// Professional color palette overrides
+// These MUST come before the minima import to take effect
+
+$brand-color:       #2563eb !default;
+$brand-color-dark:  darken($brand-color, 20%) !default;
+$brand-color-light: lighten($brand-color, 40%) !default;
+
+$text-color:       #1f2937 !default;
+$background-color: #ffffff !default;
+$code-background-color: #f9fafb !default;
+
+$link-base-color:    #2563eb !default;
+$link-visited-color: #1e40af !default;
+$link-hover-color:   #1e3a8a !default;
+
+$border-color-01: #e5e7eb !default;
+$border-color-02: #d1d5db !default;
+$border-color-03: #9ca3af !default;
+
+$table-text-color:       $text-color !default;
+$table-zebra-color:      #f9fafb !default;
+$table-header-bg-color:  #1a2942 !default;
+$table-header-border:    #1a2942 !default;
+$table-border-color:     $border-color-01 !default;
+
+@import
+  "minima/skins/{{ site.minima.skin | default: 'classic' }}",
+  "minima/initialize";
+
+// Custom styles after the import
+.site-header {
+  border-top: 5px solid $table-header-bg-color;
+  border-bottom: 1px solid $border-color-01;
+}
+
+.site-title {
+  font-weight: 700;
+  color: $text-color !important;
+}
+
+a {
+  transition: color 0.15s ease-in-out;
+}// Your overrides go here, after the import
