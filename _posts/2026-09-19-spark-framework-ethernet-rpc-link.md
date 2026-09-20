@@ -59,3 +59,23 @@ ggml_cuda_init: found 1 CUDA devices (Total VRAM: 124610 MiB):
 | qwen4exp A3B Q4_K - Medium     | 103.68 GiB |   176.94 B | CUDA       |  -1 | CUDA0        |           pp512 |       545.52 ± 78.87 |
 | qwen4exp A3B Q4_K - Medium     | 103.68 GiB |   176.94 B | CUDA       |  -1 | CUDA0        |           tg256 |         26.44 ± 0.44 |
 ```
+
+I had to set some flags on the boot for the amdgpu to use more than the default 64GB
+```
+bash
+amdgpu.no_system_mem_limit=1 amdgpu.gttsize=90112 ttm.pages_limit=23068672 ttm.page_pool_size=23068672 amdttm.pages_limit=23068672 amdttm.page_pool_size=23068672
+```
+You can translate/look these up on chatgpt or another llm  probably some of these flags are superflous but probably need ttm poolsize and page limit
+
+
+It looks like it's working
+```
+bash
+llama-bench   -m Qwen3.8-Flash-Next-UD-Q5_K_XL-00001-of-00006.gguf  --rpc 10.50.0.2:50052   --device CUDA0/RPC0   -n 256   -r 5
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 124610 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 124610 MiB
+| model                          |       size |     params | backend    | ngl | dev          |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ------------ | --------------: | -------------------: |
+| qwen4exp A3B Q5_K - Medium     | 147.41 GiB |   176.94 B | CUDA,RPC   |  -1 | CUDA0/RPC0   |           pp512 |       460.41 ± 27.33 |
+
+```
