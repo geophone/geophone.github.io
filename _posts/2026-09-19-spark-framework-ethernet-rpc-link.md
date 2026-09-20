@@ -77,5 +77,29 @@ ggml_cuda_init: found 1 CUDA devices (Total VRAM: 124610 MiB):
 | model                          |       size |     params | backend    | ngl | dev          |            test |                  t/s |
 | ------------------------------ | ---------: | ---------: | ---------- | --: | ------------ | --------------: | -------------------: |
 | qwen4exp A3B Q5_K - Medium     | 147.41 GiB |   176.94 B | CUDA,RPC   |  -1 | CUDA0/RPC0   |           pp512 |       460.41 ± 27.33 |
+| qwen4exp A3B Q5_K - Medium     | 147.41 GiB |   176.94 B | CUDA,RPC   |  -1 | CUDA0/RPC0   |           tg256 |         18.01 ± 1.10 |
 
+I found that when testing on Q8_0 which I should have enough pooled memory for there was significant host RAM usage which is unified with the GPU and llama-server is not splitting it safely
+```
+bash
+llama-fit-params -m Qwen3.8-Flash-Next-Q8_0-00001-of-00006.gguf --ctx-size 262144 --rpc 10.50.0.2:50052 --device CUDA0,RPC0 -ngl all --split-mode layer --tensor-split 40,60 -lv 5
+...
+0.00.676.447 I common_memory_breakdown_print: | memory breakdown [MiB]     |  total     free     self   model   context   compute    unaccounted |
+0.00.676.453 I common_memory_breakdown_print: |   - CUDA0 (GB10)           | 124610 = 117434 + (58557 = 52652 +    2927 +    2977) +      -51381 |
+0.00.676.453 I common_memory_breakdown_print: |   - RPC0 (10.50.0.2:50052) |  90112 =  89899 + (81512 = 74317 +    4097 +    3097) +      -81300 |
+0.00.676.454 I common_memory_breakdown_print: |   - Host                   |                    54087 = 52524 +       0 +    1563  CUDA0, backend CUDA0
+...
+You can observe with 117434 free on GB10, 58557 + 54087 is 112... which is too thin.
+...
+llama-bench -m Qwen3.8-Flash-Next-Q8_0-00001-of-00006.gguf --rpc 10.50.0.2:50052 --device CUDA0,RPC0 --split-mode layer --tensor-split 33,67 -n 256 -r 5
+...
+but the bench is failing to load, let's see if I can load the model with the split suggested by llama-fit-params.
+...
+0.22.978.822 I load_tensors:        CUDA0 model buffer size = 52652.80 MiB
+0.22.978.823 I load_tensors:    CUDA_Host model buffer size = 52524.27 MiB
+0.22.978.823 I load_tensors: RPC0[10.50.0.2:50052] model buffer size = 74317.87 MiB
+...
+llama-server -m Qwen3.8-Flash-Next-Q8_0-00001-of-00006.gguf --ctx-size 262144 --rpc 10.50.0.2:50052 --device CUDA0,RPC0 -ngl all --host 0.0.0.0 --split-mode layer --tensor-split 33,67
+...
+success
 ```
